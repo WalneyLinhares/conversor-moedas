@@ -1,0 +1,336 @@
+/* -------------------------
+   RESET & BASE
+------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Inter', sans-serif;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(145deg, rgb(11, 10, 16), rgb(18, 15, 23));
+    color: #F2F0F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* -------------------------
+   HEADER
+------------------------- */
+.section-header {
+    text-align: center;
+    width: 70%;
+    padding: 5rem;
+}
+
+.section-header h1 {
+    text-transform: uppercase;
+    color: rgb(139, 75, 255);
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.section-header p {
+    font-size: clamp(0.8rem, 1vw, 1.1rem);
+}
+
+/* -------------------------
+   CONTAINER PRINCIPAL
+------------------------- */
+.container-principal {
+    background-color: rgba(255, 255, 255, 0.035);
+    padding: 1.3rem;
+    border-radius: 15px;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.173);
+}
+
+.container-principal form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+/* -------------------------
+   INPUTS & SELECTS
+------------------------- */
+.container-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container-input label {
+    font-weight: bold;
+}
+
+.field-group {
+    display: flex;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #8a4bff83;
+    background: #0a090e28;
+    transition: box-shadow .5s ease, border-color .5s ease;
+}
+
+.field-group:hover,
+.modal-search:hover,
+.field-group:has(input[type="number"]:focus),
+.modal-search:has(input[type="search"]:focus) {
+    border-color: #8B4BFF;
+    box-shadow: 0 0 9px #8B4BFF55;
+}
+
+.field-group input {
+    flex: 1;
+    outline: none;
+    padding: 0.7rem 0.8rem;
+    background-color: #0a090e28;
+    font-size: clamp(0.8rem, 1vw, 1.2rem);
+    color: white;
+    border: none;
+}
+
+.select-inputs {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 0.8rem;
+    background-color: #0a090e28;
+    cursor: pointer;
+    border: none;
+}
+
+.select-inputs p {
+    font-weight: bold;
+    color: white;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    margin-right: 4px;
+}
+
+.select-inputs .ph {
+    color: #8B4BFF;
+    transition: color .5s ease;
+}
+
+.select-inputs:hover .ph {
+    color: white;
+}
+
+.select-inputs .fi {
+    width: 20px;
+    height: 20px;
+}
+
+/* -------------------------
+   BOTÃO TRADE
+------------------------- */
+.btn-button {
+    border-radius: 50%;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    border: none;
+    background-color: #8B4BFF;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .5s ease, transform .5s ease;
+}
+
+.btn-button:hover {
+    background-color: #B88AFF;
+    transform: scale(1.05);
+}
+
+#btn-icon {
+    transition: transform 1s ease;
+    transform: rotate(0deg);
+}
+
+/* -------------------------
+   MODAL
+------------------------- */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-box {
+  position: relative;
+  background-color: #202020;
+  padding: .8rem;
+  border-radius: 15px;
+  box-shadow: 1px 2px 5px #0000002c;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-search {
+    border-radius: 8px;
+    border: 1px solid #8a4bff83;
+    padding: .8rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-search .ph {
+    cursor: pointer;
+}
+
+.modal-search input {
+    outline: none;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.modal-search input::placeholder {
+    color: rgba(255, 255, 255, 0.76);
+}
+
+.modal-content {
+    max-height: min(22rem, 60vh);
+    overflow-y: auto;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #8B4BFF;
+    border-radius: 20px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.moeda-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 3px;
+    padding: .5rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.moeda-item.moeda-block {
+    opacity: 0.3;
+}
+
+.moeda-item:hover,
+.moeda-item:focus-visible {
+    border-radius: 8px;
+    border: 1px solid #8a4bff83;
+}
+
+.moeda-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.check-icon {
+  display: none;
+  color: #8B4BFF;
+}
+
+.moeda-item.selecionada .check-icon {
+  display: inline; 
+}
+
+/* -------------------------
+   MEDIA QUERIES
+------------------------- */
+
+/* Mobile pequeno até 450px */
+@media(max-width: 450px) {
+    .container-principal form {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .section-header {
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
+
+/* Tablet 451px - 750px */
+@media(min-width: 451px) and (max-width: 750px) {
+    .container-principal form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .section-header {
+        width: 90%;
+        padding: 2rem;
+    }
+
+    .section-header h1 {
+        font-size: clamp(2.5rem, 4vw, 3rem);
+    }
+}
+
+/* Desktop médio 751px - 1200px */
+@media(min-width: 751px) and (max-width: 1200px) {
+    .container-principal form {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .section-header {
+        width: 70%;
+        padding: 4rem;
+    }
+
+    .section-header h1 {
+        font-size: clamp(3.5rem, 4vw, 3.8rem);
+    }
+}
+
+/* Desktop grande > 1200px */
+@media(min-width: 1201px) {
+    .container-principal form {
+        flex-direction: row;
+    }
+    .section-header {
+        width: 60%;
+        padding: 5rem;
+    }
+
+    .section-header h1 {
+        font-size: 4rem;
+    }
+}
