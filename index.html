@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de moeda</title>
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="css/style.css">
     <!-- icons phosphor -->
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.6/css/flag-icons.min.css">
 
 </head>
@@ -17,68 +15,88 @@
         <h1>Conversor de moedas</h1>
         <p>Ferramenta de conversão de moedas desenvolvida para uso geral, oferecendo rapidez e precisão nos cálculos. As taxas de câmbio são atualizadas em tempo real para garantir resultados confiáveis.</p>
     </section>
-    
+
     <main class="main">
         <div class="container-principal">
-            <form action="#">
+            <div class="converter-box">
                 <div class="container-input">
                     <label for="inputOrigem">Quantia</label>
                     <div class="field-group">
-                        <input type="number" id="inputOrigem">
-                        <button type="button" id="selectOrigem" class="select-inputs">
-                            <span class="fi fi-br"></span> 
-                            <p>BRL</p>
+                        <input type="number" id="inputOrigem" value="1" min="0" step="any">
+                        <button type="button" id="selectOrigem" class="select-inputs" aria-label="Selecionar moeda de origem">
+                            <span class="fi fi-br flag-origem"></span>
+                            <p id="moeda-origem">BRL</p>
                             <span><i class="ph ph-caret-down"></i></span>
                         </button>
                     </div>
                 </div>
 
-                <button id="btn-trade" class="btn-button" type="button"><i id="btn-icon" class="ph ph-arrows-left-right"></i></button>
-                
+                <button id="btn-trade" class="btn-button" type="button" aria-label="Inverter moedas">
+                    <i id="btn-icon" class="ph ph-arrows-left-right"></i>
+                </button>
+
                 <div class="container-input">
                     <label for="inputDestino">Converter para</label>
                     <div class="field-group">
                         <input type="number" id="inputDestino" readonly>
-                        <button type="button" id="selectDestino" class="select-inputs">
-                            <span class="fi fi-us"></span> 
-                            <p>USD</p>
+                        <button type="button" id="selectDestino" class="select-inputs" aria-label="Selecionar moeda de destino">
+                            <span class="fi fi-us flag-destino"></span>
+                            <p id="moeda-destino">USD</p>
                             <span><i class="ph ph-caret-down"></i></span>
                         </button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </main>
 
-<div class="modal" id="modal-moedas">
-    <section class="modal-box">
+    <!-- GRAFICO HISTORICO DA MOEDA -->
+    <section id="historico-section">
+        <div class="historico-container">
+            <h3>Histórico (últimos 7 dias) EM BREVE</h3>
 
-        <!-- Área de busca -->
-        <div class="modal-search">
-            <i class="ph ph-magnifying-glass"></i>
-            <input type="search" name="busca" id="busca" placeholder="Buscar..." autocomplete="off">
-        </div>
-
-        <!-- Lista de moedas -->
-        <div class="modal-content">
-            <div class="moeda-item" data-currency="USD" data-flag="us">
-                <div class="moeda-info">
-                    <span class="fi fi-us"></span>
-                    <p>USD</p>
-                </div>
-                <i class="ph ph-check check-icon"></i>
-            </div>
-
-            <div class="moeda-item" data-currency="BRL" data-flag="br">
-                <div class="moeda-info">
-                    <span class="fi fi-br"></span>
-                    <p>BRL</p>
-                </div>
-                <i class="ph ph-check check-icon"></i>
+            <div id="chart-container">
+                <canvas id="chart-cambio"></canvas>
+                <div id="chart-tooltip"></div>
             </div>
         </div>
     </section>
-</div>
+
+    <!-- MODAL -->
+    <div class="modal" id="modal-moedas">
+        <section class="modal-box">
+
+            <!-- Área de busca -->
+            <div class="modal-search">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="search" name="busca" id="busca" placeholder="Buscar..." autocomplete="off">
+            </div>
+
+            <!-- Lista de moedas -->
+            <div class="modal-content">
+                <div class="moeda-item" data-currency="USD" data-flag="us">
+                    <div class="moeda-info">
+                        <span class="fi fi-us"></span>
+                        <p>USD</p>
+                    </div>
+                    <i class="ph ph-check check-icon"></i>
+                </div>
+
+                <div class="moeda-item" data-currency="BRL" data-flag="br">
+                    <div class="moeda-info">
+                        <span class="fi fi-br"></span>
+                        <p>BRL</p>
+                    </div>
+                    <i class="ph ph-check check-icon"></i>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="notification" >
+        <p class="message">Teste</p>
+    </div>
 </body>
-<script defer src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script defer src="js/script.js"></script>
 </html>
