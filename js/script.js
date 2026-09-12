@@ -323,6 +323,7 @@ class ConverterApp {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     tooltip: {
                         callbacks: {

@@ -207,7 +207,7 @@ body {
     justify-content: center;
 }
 
-/* Mesmo padrão visual do container principal */
+
 .historico-container {
     width: 100%;
     max-width: 600px;
@@ -222,7 +222,7 @@ body {
     font-weight: 600;
 }
 
-/* Caixa do gráfico — segue o estilo do seu container */
+/* Caixa do gráfico */
 #chart-container {
     background-color: rgba(255, 255, 255, 0.035);
     padding: 20px;
@@ -233,7 +233,7 @@ body {
     height: 320px;
 }
 
-/* Tooltip customizado */
+/* Tooltip */
 #chart-tooltip {
     position: absolute;
     padding: 6px 10px;
@@ -247,7 +247,6 @@ body {
     transform: translate(-50%, -120%);
     z-index: 10;
 }
-
 
 /* -------------------------
    MODAL
