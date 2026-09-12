@@ -40,7 +40,7 @@ class Converter {
         }
     }
 
-    async getGraphic(origin, destination, day = 1) {
+    async getGraphic(origin, destination, day = 7) {
         if (origin === destination) return [];
 
         const cacheKey = `${origin}-${destination}-${day}`;
@@ -59,19 +59,30 @@ class Converter {
 
             const data = await res.json();
 
-            if (data && Array.isArray(data) && data.length > 0) {
-                this.graphicCache.set(cacheKey, data);
-                return data;
+            if (Array.isArray(data) && data.length > 0) {
+                const formattedData = data.reverse().map(item => {
+                    const date = new Date(parseInt(item.timestamp) * 1000);
+
+                    const weekday = date.toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', ''); // "seg"
+                    const dayMonth = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }); // "08/09"
+
+                    return {
+                        label: `${weekday}, ${dayMonth}`,
+                        value: parseFloat(item.bid || item.ask),
+                    };
+                });
+
+                this.graphicCache.set(cacheKey, formattedData);
+                return formattedData;
             }
 
             return [];
 
         } catch (err) {
-            console.error('Falha ao buscar graphic:', err);
+            console.error('Falha ao buscar gráfico:', err);
             return [];
         }
     }
-
 
     async loadCurrencies() {
         try {
@@ -278,9 +289,61 @@ class ConverterApp {
             } else {
                 this.inputDestino.value = 'N/A';
             }
+
+            void await this.renderGraphic();
         } catch (error) {
             console.error(error);
         }
+    }
+
+    async renderGraphic() {
+        const [orig, dest] = this.converter.codes;
+        const historyData = await this.converter.getGraphic(orig, dest, 7);
+
+        if (historyData.length === 0) return;
+
+        const labels = historyData.map(d => d.label);
+        const values = historyData.map(d => d.value);
+
+        if (this.chartInstance) {
+            this.chartInstance.destroy();
+        }
+
+        const ctx = document.getElementById('chart-cambio').getContext('2d');
+        this.chartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: `Cotação ${orig}/${dest}`,
+                    data: values,
+                    borderColor: '#8B4BFFFF',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const valor = context.parsed.y;
+                                return `Valor: ${valor.toFixed(2)}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) {
+                                return value.toFixed(3);
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
     notif(message) {
