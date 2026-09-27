@@ -35,9 +35,3 @@ Aplicação web simples para conversão de valores entre diferentes moedas, com 
 ## Demo
 
 Disponível em: https://walneylinhares.github.io/conversor-moedas/
-
-## Autor
-
-Walney Linhares
-- LinkedIn: https://www.linkedin.com/in/walney-linhares-5541b9381
-- GitHub: https://github.com/WalneyLinhares
